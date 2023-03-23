@@ -18,7 +18,17 @@ app.get('/json', (req, res) => {
     if (process.env.MESSAGE_STYLE === 'uppercase') {
         message = message.toUpperCase();
     }
-    res.json({'message': message});
+    res.json({message});
 });
+
+app.get('/now', 
+    (req, res, next) => {
+        req.time = new Date().toString();
+        next();
+    },
+    (req, res, next) => {
+        res.json({time: req.time});
+    }
+);
 
 module.exports = app;
