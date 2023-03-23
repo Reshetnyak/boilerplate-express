@@ -1,11 +1,6 @@
-const dotenv = require('dotenv');
-let express = require('express');
-let app = express();
-
-if (process.env.IS_PROD === false) {
-    dotenv.config();
-    console.log('is prod: ', process.env.IS_PROD);
-}
+require('dotenv').config();
+const express = require('express');
+const app = express();
 
 console.log('Hello World');
 
