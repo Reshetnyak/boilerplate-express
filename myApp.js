@@ -1,5 +1,11 @@
+const dotenv = require('dotenv');
 let express = require('express');
 let app = express();
+
+if (process.env.IS_PROD === false) {
+    dotenv.config();
+    console.log('is prod: ', process.env.IS_PROD);
+}
 
 console.log('Hello World');
 
@@ -10,7 +16,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/json', (req, res) => {
-    res.json({"message": "Hello json"});
+    let message = 'Hello json';
+    if (process.env.MESSAGE_STYLE === 'uppercase') {
+        message = message.toUpperCase();
+    }
+    res.json({'message': message});
 });
 
 module.exports = app;
